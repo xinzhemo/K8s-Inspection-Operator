@@ -1,0 +1,29 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Name }}-manager-role
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+rules:
+  # 巡检 CR 的权限
+  - apiGroups: ["inspection.example.com"]
+    resources: ["inspectionpolicies"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["inspection.example.com"]
+    resources: ["inspectionpolicies/status"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: ["inspection.example.com"]
+    resources: ["inspectionpolicies/finalizers"]
+    verbs: ["update"]
+  # 读 Pod
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  # 读 ConfigMap（规则）
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]
+  # Leader Election（kubebuilder 默认）
+  - apiGroups: ["coordination.k8s.io"]
+    resources: ["leases"]
+    verbs: ["get", "create", "update"]

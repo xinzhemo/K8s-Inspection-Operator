@@ -1,0 +1,4 @@
+## Append samples of your project ##
+resources:
+- inspection_v1alpha1_inspectionpolicy.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

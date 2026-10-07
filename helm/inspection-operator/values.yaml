@@ -1,0 +1,25 @@
+# Operator 镜像配置
+image:
+  repository: controller
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# 副本数（单副本）
+replicaCount: 1
+
+# 资源限制
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# 巡检规则（存在 ConfigMap 里）
+rules:
+  pod-crashloop:
+    enabled: true
+    threshold: 5
+  pod-failed:
+    enabled: true

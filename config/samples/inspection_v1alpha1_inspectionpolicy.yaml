@@ -1,0 +1,14 @@
+apiVersion: inspection.example.com/v1alpha1
+kind: InspectionPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: inspection-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: inspectionpolicy-sample
+spec:
+  targetNamespaces:
+    - default
+    - kube-system
+  rulesConfigMap: inspection-rules
+  intervalSeconds: 30
+  notifierWebhook: "https://open.feishu.cn/open-apis/bot/v2/hook/placeholder"

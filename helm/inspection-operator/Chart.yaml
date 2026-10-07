@@ -1,0 +1,6 @@
+apiVersion: v2
+name: inspection-operator
+description: K8s 集群资源巡检 Operator
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

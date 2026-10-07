@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inspection-rules
+  namespace: default
+data:
+  rules.yaml: |
+    rules:
+    - name: pod-crashloop
+      resource: Pod
+      condition:
+        field: restartCount
+        op: ">"
+        value: 5
+      severity: critical
+      message: "Pod 频繁重启"
+    - name: pod-failed
+      resource: Pod
+      condition:
+        field: phase
+        op: "=="
+        value: 1
+      severity: critical
+      message: "Pod 处于 Failed 状态"
+
+

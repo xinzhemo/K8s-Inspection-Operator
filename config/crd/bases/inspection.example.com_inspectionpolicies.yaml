@@ -1,0 +1,88 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.15.0
+  name: inspectionpolicies.inspection.example.com
+spec:
+  group: inspection.example.com
+  names:
+    kind: InspectionPolicy
+    listKind: InspectionPolicyList
+    plural: inspectionpolicies
+    singular: inspectionpolicy
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: InspectionPolicy 定义巡检策略资源
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: InspectionPolicySpec 定义巡检策略的期望状态
+            properties:
+              alertCooldown:
+                default: 300
+                description: 同一异常告警冷却时间（秒）
+                minimum: 0
+                type: integer
+              intervalSeconds:
+                default: 60
+                description: 巡检周期（秒）
+                minimum: 10
+                type: integer
+              notifierWebhook:
+                description: 飞书 Webhook 地址
+                type: string
+              rulesConfigMap:
+                description: 巡检规则所在的 ConfigMap 名称
+                type: string
+              targetNamespaces:
+                description: 巡检哪些 namespace
+                items:
+                  type: string
+                minItems: 1
+                type: array
+            required:
+            - rulesConfigMap
+            - targetNamespaces
+            type: object
+          status:
+            description: InspectionPolicyStatus 定义巡检的实际状态
+            properties:
+              lastInspectionTime:
+                description: 最近一次巡检时间
+                format: date-time
+                type: string
+              totalAnomalies:
+                description: 累计发现异常数
+                format: int64
+                type: integer
+              totalInspections:
+                description: 累计巡检次数
+                format: int64
+                type: integer
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

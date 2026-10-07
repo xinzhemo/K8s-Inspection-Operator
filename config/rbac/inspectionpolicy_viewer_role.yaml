@@ -1,0 +1,23 @@
+# permissions for end users to view inspectionpolicies.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: inspection-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: inspectionpolicy-viewer-role
+rules:
+- apiGroups:
+  - inspection.example.com
+  resources:
+  - inspectionpolicies
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - inspection.example.com
+  resources:
+  - inspectionpolicies/status
+  verbs:
+  - get
