@@ -26,3 +26,5 @@ go.work
 *.swo
 *~
 go*.tar.gz
+go*.tar.gz
+*.tar.gz
