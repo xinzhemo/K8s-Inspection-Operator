@@ -264,7 +264,7 @@ anomaly_detected_total{namespace="default",severity="critical"} 6
 
 ---
 
-## 项目局限
+## 项目局限及后续补充方向
 
 - **单实例运行**：未实现 Leader Election，多副本会重复告警
 - **内存告警冷却**：Operator 重启后冷却状态丢失
