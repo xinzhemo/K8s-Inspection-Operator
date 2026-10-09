@@ -1,6 +1,6 @@
 module github.com/nick/inspection-operator
 
-go 1.22.0
+go 1.24.0
 
 require (
 	github.com/onsi/ginkgo/v2 v2.17.1
