@@ -21,7 +21,7 @@ Prometheus 时序指标捕获。
 
 ### 系统架构图
 
-![系统架构图](./docs/arch.png)
+![系统架构图](./docs/architecture.png)
 ### 核心模块
 
 K8s-Inspection-Operator 项目由以下六个核心模块组成：
