@@ -21,14 +21,14 @@ Prometheus 时序指标捕获。
 ### 真实告警链路验证
 
 当 Pod 发生 **CrashLoopBackOff** 时，Operator 自动检测异常，经过冷却降噪后，实时推送至飞书：
-![飞书告警](screenshots/alert.png)
+![飞书告警](docs/alert.png)
 
 *检测到 Pod 频繁重启异常，经告警冷却机制降噪后，实时推送至飞书。*
 
 **链路验证**：`故障注入 (CrashLoopBackOff)` → `Operator 检测日志` → `飞书实时告警`
-![故障注入](screenshots/event.png)
-![检测流程](screenshots/flow.png)
-![飞书告警](screenshots/alert.png)
+![故障注入](docs/event.png)
+![检测流程](docs/flow.png)
+![飞书告警](docs/alert.png)
 
 ---
 
