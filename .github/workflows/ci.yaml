@@ -35,7 +35,7 @@ jobs:
           git diff --exit-code
       - name: Run unit tests
         run: go test ./pkg/... -v
-
+        
       - name: Build manager binary
         run: make build
 

@@ -7,7 +7,7 @@ data:
   rules.yaml: |
     rules:
     - name: pod-crashloop
-      resource: Pod
+      resource: pod
       condition:
         field: restartCount
         op: ">"
@@ -15,7 +15,7 @@ data:
       severity: critical
       message: "Pod 频繁重启"
     - name: pod-failed
-      resource: Pod
+      resource: pod
       condition:
         field: phase
         op: "=="

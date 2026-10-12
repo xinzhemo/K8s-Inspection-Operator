@@ -19,6 +19,8 @@ package controller
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/nick/inspection-operator/pkg/metrics"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -26,7 +28,6 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
-	"time"
 
 	inspectionv1alpha1 "github.com/nick/inspection-operator/api/v1alpha1"
 	"github.com/nick/inspection-operator/pkg/cooldown"
@@ -139,7 +140,7 @@ func (r *InspectionPolicyReconciler) Reconcile(ctx context.Context, req ctrl.Req
 				} else {
 					if policy.Spec.NotifierWebhook != "" {
 						message := fmt.Sprintf(
-							"K8S巡检异常\nNamespace: %s\nPod: %s\n规则: %s\n严重等级: %s",
+							"【告警】K8S巡检异常\nNamespace: %s\nPod: %s\n规则: %s\n严重等级: %s",
 							anomaly.Namespace, anomaly.PodName, anomaly.Message, anomaly.Severity,
 						)
 						if err := notifier.SendFeishuAlert(policy.Spec.NotifierWebhook, message); err != nil {
